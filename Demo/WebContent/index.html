@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<script src="https://code.jquery.com/jquery-latest.js"></script>
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+		
+		<script src="http://www.owlcarousel.owlgraphic.com/assets/owlcarousel/owl.carousel.js"></script>
+		<link rel="stylesheet" href="http://www.owlcarousel.owlgraphic.com/assets/owlcarousel/assets/owl.carousel.min.css"/>
+		<link rel="stylesheet" href="http://www.owlcarousel.owlgraphic.com/assets/owlcarousel/assets/owl.theme.default.min.css"/>
+		
+		<script src="http://noelboss.github.io/featherlight/release/featherlight.min.js"></script>
+		<script src="http://noelboss.github.io/featherlight/release/featherlight.gallery.min.js"></script>
+		<link rel="stylesheet" href="http://noelboss.github.io/featherlight/release/featherlight.min.css"/>
+		
+		<link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="main.css">
+		<script src="myjs.js" ></script>
+		<script src="method.js"></script>
+		<script src="method2.js"></script>
+		<meta name="google-signin-client_id" content="846042350708-k2uajbcle5b83vo1bajgr5qeducmcibm.apps.googleusercontent.com">
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="Format.css">
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" ></script>
+		<script src="https://www.googleapis.com/auth/plus.login"></script>
+		<script src="https://apis.google.com/js/client:plusone.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> 
+		<script src="https://apis.google.com/js/client:platform.js?onload=startApp"></script>
+</head>
+<body>
+
+<div id='menu-nav'>
+    <div id='navigation-bar'>
+        <ul>
+            <li class='left-menu-sub-nav'><a href='/'><span>Home</span></a></li>
+            <li class='left-menu-sub-nav'><a href='#'><span>Feature</span></a></li>
+            <li class='left-menu-sub-nav'><a href='#'><span>Showcase</span></a></li>
+            <li class='left-menu-sub-nav'><a href='#'><span>Contact</span></a></li>
+           
+            <li class='right-menu-sub-nav menu-sub-parent'><a href='#'><span>Language</span></a></li>
+            <li id = "myBtn" 	class='right-menu-sub-nav'><a href='#'><span>Sign In</span></a></li>
+            <li id = "profile"  class='right-menu-sub-nav'></li>
+			<li id=	"fbname"	class='right-menu-sub-nav'></li>
+			<li id=	"fbphoto"	class='right-menu-sub-nav'></li>
+			<li class='right-menu-sub-nav'><fb:profile-pic style="display:none" uid="loggedinuser" size="square" facebook-logo="false" id="userphoto" ><a href='google.com'></a></fb:profile-pic></fb:profile-pic></li>
+            <!-- The Modal -->
+				<div id="myModal" class="modal">
+				
+				  <!-- Modal content -->
+				  <div class="modal-content">
+				    <div class="modal-header">
+				      <span class="close">×</span>
+				      <center><h2 style="font-family: Arial" >Sign In</h2></center>
+				    </div>
+				    <div class="modal-body">
+				    <div class="modal-body-top">
+						<fb:login-button size="medium" scope="public_profile" onlogin="checkLoginState();" autologoutlink="true" id="login-facebook">
+				  			Sign in with facebook
+						</fb:login-button>
+						
+				      	
+						
+					</div>
+					<div class="modal-body-bottom">
+						<div id="gConnect">
+				    	<div id="signin-button"></div>
+				 		</div>
+				 			<div id="authOps" style="display:none">
+				  		 	 <button id="signOut" onclick="auth2.signOut()">Sign Out</button>
+				
+				   			 
+				
+				  		</div>
+				
+					</div>
+					</div>
+				 </div> 
+				 </div>
+			
+        </ul>
+    </div>
+</div>
+<div id='intro-div'>
+    <div id='intro-content'>
+        <img id='intro-img' src="resource/logo.png" />
+
+        <div id='intro-text'>
+            <p id='intro-title'>eZChart</p>
+            <p id='intro-slogan'>Create your chart simply and effectively</p>
+            <ul>
+                <li class='step-item'>Enter your data</li>
+                <li class='step-item'>Click "Generate Chart"</li>
+                <li class='step-item'>Choose your suitable chart</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<button id='intro-button'>Create Your Chart</button>
+<div id='feature-div'>
+    <ul id='feature-list'>
+        <li class='feature-item'><img src="resource/export.png"/><span>Export</span>
+            <p>Export your chart to many different formats</p>
+        </li>
+        <li class='feature-item'><img src="resource/share.png"/><span> Share</span>
+            <p>Share your chart to others via Facebook, Google+</p>
+        </li>
+        <li class='feature-item'><img src="resource/manage.png"/><span> Manager</span>
+            <p>Manage your charts easily with Managing System</p>
+        </li>
+    </ul>
+</div>
+<div id="demo">
+    <div class="owl-carousel">
+        <div class="item">
+            <a class="gallery" href="resource/show1.png">
+                <img src="resource/show1.png" />
+            </a>
+        </div>
+        <div class="item">
+            <a class="gallery" href="resource/show2.png">
+                <img src="resource/show2.png" />
+            </a>
+        </div>
+        <div class="item">
+            <a class="gallery" href="resource/show3.png">
+                <img src="resource/show3.png" />
+            </a>
+        </div>
+        <div class="item">
+            <a class="gallery" href="resource/show4.png">
+                <img src="resource/show4.png" />
+            </a>
+        </div>
+        <div class="item">
+            <a class="gallery" href="resource/show5.png">
+                <img src="resource/show5.png" />
+            </a>
+        </div>
+    </div>
+</div>
+    
+    <footer class='container' id='footer'>
+        <div class='row'>
+            <div class='col-sm-4'>
+                <a href="http://www.axonactive.vn" target="_blank">
+                    <img class='img-responsive center' src='resource/axonactive.png'/>
+                </a>
+            </div>
+            <div class='col-xs-4 col-sm-5 half-full-width'>
+                <div class='align-left'>
+                    <div class='row'>
+                        <div class='scale-to-small col-xs-1'>
+                            <img src='resource/axonactive.png'/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+        </div>
+        
+    </footer>
+<script>
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+	
+    modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+
+    modal.style.display = "none";
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="google-signin-client_id" content="846042350708-k2uajbcle5b83vo1bajgr5qeducmcibm.apps.googleusercontent.com">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="Format.css">
+</head>
+<body>
+<!-- Trigger/Open The Modal -->
+<button style="font-family: Arial" id="myBtn" >Login</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <center><h2 style="font-family: Arial" >Login</h2></center>
+    </div>
+    <div class="modal-body">
+		<fb:login-button size="medium" scope="public_profile" onlogin="checkLoginState();" autologoutlink="true" id="login-facebook">
+  			Login with facebook
+		</fb:login-button>
+		<fb:profile-pic style="visibility: hidden" uid="loggedinuser" size="square" facebook-logo="false" id="userphoto" ></fb:profile-pic>
+      	
+		<div id="fbname"></div>
+		
+		<div id="gConnect">
+    	<div id="signin-button"></div>
+ 		</div>
+ 		 <div id="authOps" style="display:none">
+  		  <button id="signOut" onclick="auth2.signOut()">Sign Out</button>
+
+   			 <div id="profile"></div>
+
+  		</div>
+
+	</div>
+ </div> 
+ </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" ></script>
+<script src="https://www.googleapis.com/auth/plus.login"></script>
+<script src="https://apis.google.com/js/client:plusone.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> 
+<script type="text/javascript">
+var auth2 = {};
+var helper = (function() {
+  return {
+    /**
+     * Hides the sign in button and starts the post-authorization operations.
+     *
+     * @param {Object} authResult An Object which contains the access token and
+     *   other authentication information.
+     */
+    onSignInCallback: function(authResult) {
+      $('#authResult').html('Auth Result:<br/>');
+      for (var field in authResult) {
+        $('#authResult').append(' ' + field + ': ' +
+            authResult[field] + '<br/>');
+      }
+      if (authResult.isSignedIn.get()) {
+  // 		window.location = "aboutus.html";
+        $('#authOps').show('slow');
+        $('#gConnect').hide();
+        helper.profile();
+        helper.people();
+      } else {
+          if (authResult['error'] || authResult.currentUser.get().getAuthResponse() == null) {          
+          }
+          $('#authResult').append('Logged out');
+          $('#authOps').hide('slow');
+          $('#gConnect').show();
+      }
+    },
+
+    /**
+     * Calls the OAuth2 endpoint to disconnect the app for the user.
+     */
+    disconnect: function() {
+      // Revoke the access token.
+      auth2.disconnect();
+    },
+
+    /**
+     * Gets and renders the currently signed in user's profile data.
+     */
+    profile: function(){
+      gapi.client.plus.people.get({
+        'userId': 'me'
+      }).then(function(res) {
+        var profile = res.result;
+        $('#profile').empty();
+        $('#profile').append(
+            $('<p><img src=\"' + profile.image.url + '\"></p>'));
+        $('#profile').append(
+            $('<p>' + profile.displayName  + '</p>'));
+        
+      }, function(err) {
+        var error = err.result;
+        $('#profile').empty();
+        $('#profile').append(error.message);
+      });
+    }
+  };
+})();
+
+/**
+ * Handler for when the sign-in state changes.
+ *
+ * @param {boolean} isSignedIn The new signed in state.
+ */
+var updateSignIn = function() {
+  
+  if (auth2.isSignedIn.get()) {
+
+    helper.onSignInCallback(gapi.auth2.getAuthInstance());
+  }else{
+ 
+    helper.onSignInCallback(gapi.auth2.getAuthInstance());
+  }
+}
+
+/**
+ * This method sets up the sign-in listener after the client library loads.
+ */
+function startApp() {
+  gapi.load('auth2', function() {
+    gapi.client.load('plus','v1').then(function() {
+      gapi.signin2.render('signin-button', {
+          scope: 'https://www.googleapis.com/auth/plus.login',
+          fetch_basic_profile: false });
+      gapi.auth2.init({fetch_basic_profile: false,
+          scope:'https://www.googleapis.com/auth/plus.login'}).then(
+            function (){
+          
+              auth2 = gapi.auth2.getAuthInstance();
+              auth2.isSignedIn.listen(updateSignIn);
+              auth2.then(updateSignIn);
+            });
+    });
+  });
+}
+</script>
+<script src="https://apis.google.com/js/client:platform.js?onload=startApp"></script>
+
+
+
+<script>
+function statusChangeCallback(response) {
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status == 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status == 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      userphoto.style.display = 'none';
+      fbname.style.display = 'none';
+    } else {
+    	userphoto.style.display = 'none';
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+    	fbname.style.display = 'none';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '556420511197612',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.6' // use graph api version 2.6
+  });
+ // FB.Event.subscribe('auth.login', function() {
+  //    window.location = "aboutus.html";
+//  });
+
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    FB.api('/me',{fields: "id,name,picture"}, function(response) {
+      document.getElementById('fbname').innerHTML =response.name;
+      fbname.style.display = 'block';
+      userphoto.style.display = 'block';
+      	
+    });
+ 
+  }
+  
+
+</script>
+ 
+
+
+  
+
+<script>
+
+
+</script>
+<script>
+//Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+	
+    modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+
+    modal.style.display = "none";
+};
+
+
+
+</script>
+
+
+</body>
+</html>

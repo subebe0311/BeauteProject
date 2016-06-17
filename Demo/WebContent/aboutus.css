@@ -1,0 +1,115 @@
+
+body {
+	
+  font-size: 16px;
+  background: #F0F2F3;
+  font-family: sans-serif;
+}
+
+.container{
+	width: 750px;
+}
+.menu_picture{
+	border-radius: 10px;
+	width: 80%;
+}
+.icon{
+	display:inline-block;
+}
+.app-icon{
+	display: inline-block;
+    background: url('image/App-Store_icon.png') no-repeat;
+    width: 101px;
+    height: 32px;
+    margin-left: 15px;
+    border-radius: 15px ;
+    background-size: 100%;
+	bottom:2px;
+	position:relative;
+}
+.app-icon:hover {
+	background: url('image/App-Store_icon-hover.png') no-repeat;
+	background-size: 100%;
+	}
+	
+.Google-icon{
+	display: inline-block;
+    background: url('image/Google-Play_icon.png') no-repeat;
+    width: 101px;
+    height: 32px;
+    margin-left: 15px;
+    border-radius: 15px ;
+    background-size: 100%;
+	bottom:2px;
+	position:relative;
+}
+.Google-icon:hover {
+	background: url('image/Google-Play_icon-hover.png') no-repeat;
+	background-size: 100%;
+	}
+
+article{
+	clear: right;
+	margin-top:5px;
+}
+	
+.img_space{
+	position: relative;
+	float:left;
+	width:20%;
+	height: 220px;
+	}
+
+#img_main{
+	position:relative;
+	width:100%;
+}
+
+@media (min-width: 768px) and (max-width: 1050px)
+{
+.menu_picture{
+	border-radius: 10px;
+	height: 30%;
+	width: 70%;
+	vertical-align: middle;
+	margin-left:10px;
+}
+.img_space{
+		float: left;
+		position: relative;
+		height: 180px;
+		width :20%;
+	}
+p{
+		font-size:12px;
+	}
+#about_us{
+	margin: auto;
+	width:80%;
+}	
+
+}
+
+@media  (max-width: 768px)
+{
+	.img_space{
+		float: left;
+		position: relative;
+		width:20%;
+		height:auto;
+	}
+	.container{
+		width:auto;
+	}
+	.menu_picture{
+		border-radius: 10px;		
+}	
+	article{
+		clear: both;
+		margin:20px;
+	}
+	p{
+		font-size:12px;
+	}
+}
+	
